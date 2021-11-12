@@ -1,2 +1,73 @@
 ---
-# tasks file for utils
+# Instaling Vim
+  - name: Install vim
+    apt:
+      name: vim
+      state: present
+
+# Instaling Nano
+  - name: Install nano
+    apt:
+      name: nano
+      state: present
+
+# Instaling Git
+  - name: Install git
+    apt:
+      name: git
+      state: present
+
+# Instaling Whois
+  - name: Install whois
+    apt:
+      name: whois
+      state: present
+
+# Instaling Curl
+  - name: Install curl
+    apt:
+      name: curl
+      state: present
+
+# Instaling Tree
+  - name: Install tree
+    apt:
+      name: tree
+      state: present
+
+# Instaling Terminator
+  - name: Install terminator
+    apt:
+      name: terminator
+      state: present  
+
+# Instaling Zshell
+  - name: Install zsh
+    apt:
+      name: zsh
+      state: present
+
+  - name: Change zsh defaut zsh theme to bira theme
+    lineinfile: 
+      path: ~/.zshrc 
+      regexp: 'ZSH_THEME=.*' 
+      line: 'ZSH_THEME="bira"'
+      backrefs: yes     
+
+# Installing Chrome
+  - name: Download Chrome publick key and add it.
+    ansible.builtin.shell:
+      cmd: wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+
+  - name: Add Chrome Repository.
+    ansible.builtin.shell:
+      cmd: sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+
+  - name: Update packges to use the new chrome packge
+    apt:
+      update_cache: yes
+
+  - name: Install Google Chrome
+    apt:
+      name: google-chrome-stable
+      state: present         
